@@ -140,3 +140,40 @@ console.log(result); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
 ---
 
 ### <a id="quickSort"></a>Быстрая сортировка ###
+* Нужно выбрать опорный элемент, который разделяет массив на две части: левую и правую (в левой части все элементы < опорного элемента. В правой части все элементы > опорного элемента)
+* Алгоритм работает рекурсивно до тех пор, пока длина массивов не будет равна 1
+* Объединение двух полученных массивов в один
+
+Пример:
+
+``` javascript
+const arr = [5, 8, 9, 4, 7, 1, 3, 2, 6];
+
+function quickSort(arr) {
+  // выход из рекурсии
+  if (arr.length <= 1) return arr;
+
+  const pivotIndex = Math.floor(arr.length / 2);
+  const pivot = arr[pivotIndex]; // Точка опоры, которая делит массив пополам
+  const leftPart = []; // Левая часть массива
+  const rightPart = []; // Правая часть массива
+
+  for (let i = 0; i < arr.length; i++) {
+    if (i === pivotIndex) {
+      continue
+    } else if (arr[i] < pivot) {
+      leftPart.push(arr[i]);
+    } else {
+      rightPart.push(arr[i]);
+    }
+    
+  }
+
+  return [...quickSort(leftPart), pivot, ...quickSort(rightPart)]
+}
+
+const result = quickSort(arr);
+console.log(result); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+// Сложность O(n log n)
+```
