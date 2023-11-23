@@ -71,37 +71,35 @@ for (let i = 0; i < array.length; i++) {
 Пример бинарного поиска:
 
 ``` javascript
-const createArray = new Array(101).fill(0);
-const array = createArray.map((value, index) => index);
+const createArr = new Array(100).fill(0);
+const arr = createArr.map((item, index) => index + 1);
+let count = 0;
 
-function binarySearch(array, target) {
-  let iterations = 0; // Количество итераций
-  let start = 0; // Начальный индекс
-  let end = array.length; // Конечный индекс
-  let mid = null; // Средний индекс
+const search = function (arr, target) {
+  let left = 0;
+  let right = arr.length - 1;
+  let middleIndex = null;
 
-  while(start <= end) {
-    iterations++
-    // Находим средний индекс массива
-    mid = Math.floor((start + end) / 2)
-    
-    if (array[mid] === target) {
-      console.log('iterations:', iterations) // Найдено за 1 шаг
-      return mid
-    } else if (array[mid] < target) {
-      // Если элемент меньше искомого числа, то исключаем левую половину массива
-      start = mid + 1;
-    } else if (array[mid] > target) {
-      // Если элемент больше искомого числа, то исключаем правую половину массива
-      end = mid - 1;
+  while (left <= right) {
+    console.clear();
+    count++;
+    console.log('count:', count);
+    middleIndex = Math.floor((left + right) / 2);
+
+    if (target === arr[middleIndex]) {
+      return arr[middleIndex];
+    } else if (target < arr[middleIndex]) {
+      right = middleIndex - 1;
     } else {
-      return 'Ничего не нашлось:('
+      left = middleIndex + 1;
     }
   }
+
+  return -1
 }
 
-const result = binarySearch(array, 50);
-console.log(result); // 50
+const result = search(arr, 25);
+console.log(result);
 
 // Сложность O(Log n)
 ```
